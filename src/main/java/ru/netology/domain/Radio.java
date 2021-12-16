@@ -1,9 +1,18 @@
 package ru.netology.domain;
 
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+
+@AllArgsConstructor
+@NoArgsConstructor
+@Data
+
 public class Radio {
 
     private int currentChannel;
     private int currentVolume;
+    private int amountChannel = 10;
 
     public int makeNextChannel() {
         if (currentChannel < 9) {
@@ -26,10 +35,8 @@ public class Radio {
     }
 
     public int makeVolumeUp() {
-        if (currentVolume < 10) {
+        if (currentVolume < 100) {
             currentVolume++;
-        } else {
-            currentVolume = 0;
         }
         return currentVolume;
     }
@@ -51,18 +58,10 @@ public class Radio {
     }
 
     public void setCurrentVolume(int currentVolume) {
-        if (currentVolume < 0 || currentVolume > 10) {
+        if (currentVolume < 0 || currentVolume > 100) {
             return;
         }
         this.currentVolume = currentVolume;
     }
 
-
-    public int getCurrentChannel() {
-        return currentChannel;
-    }
-
-    public int getCurrentVolume() {
-        return currentVolume;
-    }
 }

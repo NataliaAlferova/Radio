@@ -7,95 +7,82 @@ import static org.junit.jupiter.api.Assertions.*;
 
 
 class RadioTest {
-
+    Radio radio = new Radio ();
 
     @Test
-    public void makeNextChannelLess9 () {
-        Radio radio = new Radio ();
+    public void makeNextChannelWhenLess9 () {
         radio.setCurrentChannel (radio.makeNextChannel());
         assertEquals(1, radio.getCurrentChannel() );
     }
 
     @Test
-    public void makeNextChannelFrom9 () {
-        Radio radio = new Radio ();
+    public void makeNextChannelWhen9 () {
         radio.setCurrentChannel(9);
         radio.setCurrentChannel (radio.makeNextChannel ());
         assertEquals(0, radio.getCurrentChannel () );
     }
 
     @Test
-    public void makeNextChannelMore9 () {
-        Radio radio = new Radio ();
+    public void makeNextChannelWhenMore9 () {
         radio.setCurrentChannel(10);
         assertEquals(0,radio.getCurrentChannel() );
     }
 
     @Test
-    public void makePrevChannelFrom0 () {
-        Radio radio = new Radio();
+    public void makePrevChannelWhen0 () {
         radio.makePrevChannel();
         assertEquals(9,radio.getCurrentChannel() );
     }
 
     @Test
-    public void makePrevChannelMore0 () {
-        Radio radio = new Radio();
+    public void makePrevChannelWhenMore0 () {
         radio.setCurrentChannel(5);
         radio.makePrevChannel();
         assertEquals(4, radio.getCurrentChannel());
     }
 
     @Test
-    public void makePrevChannelLess0 () {
-        Radio radio = new Radio();
+    public void makePrevChannelWhenLess0 () {
         radio.setCurrentChannel(-1);
         assertEquals(0,radio.getCurrentChannel() );
     }
 
     @Test
-    public void makeVolumeUpLess10 () {
-        Radio radio = new Radio();
+    public void makeVolumeUpWhenLess100 () {
         radio.makeVolumeUp();
         assertEquals(1, radio.getCurrentVolume() );
     }
 
     @Test
-    public void makeVolumeUpFrom10 () {
-        Radio radio = new Radio();
-        radio.setCurrentVolume(10);
+    public void makeVolumeUpWhen100 () {
+        radio.setCurrentVolume(100);
         radio.makeVolumeUp();
-        assertEquals(0, radio.getCurrentVolume());
+        assertEquals(100, radio.getCurrentVolume());
     }
 
     @Test
-    public void makeVolumeDownMore0 () {
-        Radio radio = new Radio();
+    public void makeVolumeDownWhenMore0 () {
         radio.setCurrentVolume(6);
         radio.makeVolumeDown();
         assertEquals(5, radio.getCurrentVolume());
     }
 
     @Test
-    public void makeVolumeDownFrom0 () {
-        Radio radio = new Radio();
-        radio.setCurrentVolume(0);
+    public void makeVolumeDownWhen0 () {
         radio.makeVolumeDown();
         assertEquals(0, radio.getCurrentVolume());
     }
 
     @Test
-    public void makeVolumeDownLess0 () {
-        Radio radio = new Radio();
+    public void makeVolumeDownWhenLess0 () {
         radio.setCurrentVolume(-1);
         radio.makeVolumeDown();
         assertEquals(0, radio.getCurrentVolume());
     }
 
     @Test
-    public void makeVolumeUpMore10 () {
-        Radio radio = new Radio();
-        radio.setCurrentVolume(11);
+    public void makeVolumeUpWhenMore100 () {
+        radio.setCurrentVolume(101);
         radio.makeVolumeDown();
         assertEquals(0, radio.getCurrentVolume());
     }
