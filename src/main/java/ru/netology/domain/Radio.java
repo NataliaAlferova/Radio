@@ -7,14 +7,15 @@ public class Radio {
     private int amountChannel;
 
     public Radio(int amountChannel) {
-        this.amountChannel = 10;
+        this.amountChannel = amountChannel;
     }
 
     public Radio() {
+        this.amountChannel = 10;
     }
 
     public int makeNextChannel() {
-        if (currentChannel < 9) {
+        if (currentChannel < amountChannel-1 ) {
             currentChannel++;
         }
         else {
@@ -28,7 +29,7 @@ public class Radio {
             currentChannel--;
         }
         else {
-            currentChannel = 9;
+            currentChannel = 19;
         }
         return currentChannel;
     }
@@ -50,17 +51,16 @@ public class Radio {
     }
 
     public void setCurrentChannel(int currentChannel) {
-        if (currentChannel < 0 || currentChannel > 9) {
-            return;
+        if (currentChannel >= 0 && currentChannel < amountChannel) {
+            this.currentChannel = currentChannel;
         }
-        this.currentChannel = currentChannel;
     }
 
     public void setCurrentVolume(int currentVolume) {
-        if (currentVolume < 0 || currentVolume > 100) {
-            return;
+        if (currentVolume >= 0 && currentVolume <= 100) {
+            this.currentVolume = currentVolume;
         }
-        this.currentVolume = currentVolume;
+
     }
 
     public int getCurrentChannel() {
@@ -69,14 +69,6 @@ public class Radio {
 
     public int getCurrentVolume() {
         return currentVolume;
-    }
-
-    public int getAmountChannel() {
-        return amountChannel;
-    }
-
-    public void setAmountChannel(int amountChannel) {
-        this.amountChannel = amountChannel;
     }
 
 }

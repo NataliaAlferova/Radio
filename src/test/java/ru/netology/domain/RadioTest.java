@@ -7,83 +7,95 @@ import static org.junit.jupiter.api.Assertions.*;
 
 
 class RadioTest {
-    Radio radio = new Radio ();
+    int amountChannel = 20;
+    int maxChannel = amountChannel -1;
+    int minChannel = 0;
+    int maxVolume = 100;
+    int minVolume = 0;
+
+    Radio radio = new Radio(amountChannel);
+    Radio defaultRadio = new Radio();
 
     @Test
-    public void makeNextChannelWhenLess9 () {
-        radio.setCurrentChannel (radio.makeNextChannel());
-        assertEquals(1, radio.getCurrentChannel() );
+    public void makeNextChannel () {
+        radio.makeNextChannel();
+        assertEquals(minChannel + 1, radio.getCurrentChannel() );
     }
 
     @Test
-    public void makeNextChannelWhen9 () {
-        radio.setCurrentChannel(9);
-        radio.setCurrentChannel (radio.makeNextChannel ());
-        assertEquals(0, radio.getCurrentChannel () );
+    public void makeNextChannelWhenMax () {
+        radio.setCurrentChannel(maxChannel);
+        radio.makeNextChannel ();
+        assertEquals(minChannel, radio.getCurrentChannel () );
     }
 
     @Test
-    public void makeNextChannelWhenMore9 () {
-        radio.setCurrentChannel(10);
+    public void makePrevChannelWhenMin () {
+        radio.makePrevChannel();
+        assertEquals(maxChannel,radio.getCurrentChannel() );
+    }
+
+    @Test
+    public void makePrevChannelWhenMax () {
+        radio.setCurrentChannel(maxChannel);
+        radio.makePrevChannel();
+        assertEquals(maxChannel - 1, radio.getCurrentChannel());
+    }
+
+    @Test
+    public void setCurrentChannelLessMin () {
+        radio.setCurrentChannel(minChannel - 1);
+        assertEquals(0, radio.getCurrentChannel() );
+    }
+
+    @Test
+    public void setCurrentChannelMoreMax () {
+        radio.setCurrentChannel(maxChannel + 1);
         assertEquals(0,radio.getCurrentChannel() );
     }
 
     @Test
-    public void makePrevChannelWhen0 () {
-        radio.makePrevChannel();
-        assertEquals(9,radio.getCurrentChannel() );
-    }
-
-    @Test
-    public void makePrevChannelWhenMore0 () {
-        radio.setCurrentChannel(5);
-        radio.makePrevChannel();
-        assertEquals(4, radio.getCurrentChannel());
-    }
-
-    @Test
-    public void makePrevChannelWhenLess0 () {
-        radio.setCurrentChannel(-1);
-        assertEquals(0,radio.getCurrentChannel() );
-    }
-
-    @Test
-    public void makeVolumeUpWhenLess100 () {
+    public void makeVolumeUp () {
         radio.makeVolumeUp();
-        assertEquals(1, radio.getCurrentVolume() );
+        assertEquals(minVolume + 1, radio.getCurrentVolume() );
     }
 
     @Test
-    public void makeVolumeUpWhen100 () {
-        radio.setCurrentVolume(100);
+    public void makeVolumeUpWhenMax () {
+        radio.setCurrentVolume(maxVolume);
         radio.makeVolumeUp();
-        assertEquals(100, radio.getCurrentVolume());
+        assertEquals(maxVolume, radio.getCurrentVolume());
     }
 
     @Test
-    public void makeVolumeDownWhenMore0 () {
-        radio.setCurrentVolume(6);
+    public void makeVolumeDown () {
+        radio.setCurrentVolume(maxVolume -1);
         radio.makeVolumeDown();
-        assertEquals(5, radio.getCurrentVolume());
+        assertEquals(maxVolume - 2, radio.getCurrentVolume());
     }
 
     @Test
-    public void makeVolumeDownWhen0 () {
+    public void makeVolumeDownWhenMin () {
         radio.makeVolumeDown();
+        assertEquals(minVolume, radio.getCurrentVolume());
+    }
+
+    @Test
+    public void setVolumeMoreMax () {
+        radio.setCurrentVolume(maxVolume + 1);
         assertEquals(0, radio.getCurrentVolume());
     }
 
     @Test
-    public void makeVolumeDownWhenLess0 () {
-        radio.setCurrentVolume(-1);
-        radio.makeVolumeDown();
+    public void setVolumeLessMin () {
+        radio.setCurrentVolume(minVolume - 1);
         assertEquals(0, radio.getCurrentVolume());
     }
 
     @Test
-    public void makeVolumeUpWhenMore100 () {
-        radio.setCurrentVolume(101);
-        radio.makeVolumeDown();
-        assertEquals(0, radio.getCurrentVolume());
+    public void makeNextChannelForDefault () {
+        defaultRadio.makeNextChannel();
+        assertEquals(minChannel + 1, defaultRadio.getCurrentChannel() );
     }
+
 }
